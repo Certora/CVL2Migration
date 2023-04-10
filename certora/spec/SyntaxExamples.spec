@@ -6,7 +6,7 @@ using SecondaryContract as secondaryInstance
 methods {
     //// CVL 1: methods block entries don't have `function`, visibility
     //// modifiers, or `;`
-    transferFrom(address, uint) envfree
+    transferFrom(address, address, uint) returns(bool) envfree
 
     //// CVL 1: the order of the modifiers is loose
     //// TODO: can't actually reorder them?
@@ -14,7 +14,7 @@ methods {
 
     //// CVL 1: in the `methods` block, the receiver must be the contract instance
     secondaryInstance.balanceOf(address) returns(uint) envfree
-    secondaryInstance.transferFrom(address, uint) envfree
+    secondaryInstance.transfer(address, uint) returns(bool) envfree
 }
 
 //// CVL 1: `use` statements don't require semicolons
