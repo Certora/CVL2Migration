@@ -24,7 +24,6 @@ use rule importedInvariant filtered {
     f -> !excludeFromProver(f)
 }
 
-//// CVL 2: Method literals must be prefixed with `sig:`
 rule onlyApproveIncreasesAllowance {
     address sender; address recipient;
     allowance_before = allowance(sender, recipient);
@@ -34,6 +33,7 @@ rule onlyApproveIncreasesAllowance {
 
     allowance_after = allowance(sender, recipient);
 
+    //// CVL 2: Method literals must be prefixed with `sig:`
     assert allowance_after >= allowance_before
         => f.selector == sig:approve(address, uint).selector,
         "only approve can increase allowances";
