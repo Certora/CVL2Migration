@@ -7,4 +7,6 @@ methods {
     ////
     //// here `f` expects a Permission enum as an argument
     f(Example.Permission permission) => NONDET
+
+    //// TODO: more examples
 }
