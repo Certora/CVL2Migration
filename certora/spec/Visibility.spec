@@ -1,5 +1,1 @@
-//
-//
-//
-
-// TODO: visibility example
+// TODO

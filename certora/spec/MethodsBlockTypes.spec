@@ -1,6 +1,3 @@
-
-
-
 methods {
     //// CVL 1: enum arguments to contract functions needed to be encoded as `uint8`
     ////
