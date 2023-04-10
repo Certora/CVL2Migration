@@ -34,7 +34,6 @@ rule onlyApproveIncreasesAllowance {
     allowance_after = allowance(sender, recipient);
 
     assert allowance_after >= allowance_before
-        //// CVL 1: Method literals look like function calls
         => f.selector == approve(address, uint).selector,
         "only approve can increase allowances";
 }
