@@ -8,7 +8,6 @@ methods {
     //// `;`, and declare visibility (internal or external)
     function transferFrom(address, uint) external envfree;
 
-<<<<<<< HEAD
     //// CVL 2: the order of the modifiers is strict
     //// TODO: can't actually reorder them?
     function allowance(address) returns(uint) envfree;
