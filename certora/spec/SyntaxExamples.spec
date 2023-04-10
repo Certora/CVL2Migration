@@ -18,7 +18,7 @@ methods {
 }
 
 //// CVL 2: `use` statements require semicolons, unless they end with a block
-use invariant importedInvariant
+use invariant importedInvariant;
 
 use rule importedInvariant filtered {
     f -> !excludeFromProver(f)
@@ -35,7 +35,6 @@ rule onlyApproveIncreasesAllowance {
     allowance_after = allowance(sender, recipient);
 
     assert allowance_after >= allowance_before
-        //// CVL 2: Method literals look like function calls
         => f.selector == sig:approve(address, uint).selector,
         "only approve can increase allowances";
 }
