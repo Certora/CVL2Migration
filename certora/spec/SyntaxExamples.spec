@@ -1,6 +1,3 @@
-//// CVL 2 introduces several superficial syntax changes that clarify and
-//// standardize the syntax.
-////
 //// TODO: See .../changes.md#superficial-syntax-changes
 
 //// CVL 2: `using`, `pragma`, and `import` require terminating semicolons
