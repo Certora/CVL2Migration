@@ -1,29 +1,30 @@
-//// CVL 1: `using`, `pragma`, and `import` do not require terminating semicolons
-pragma specify 1.0
-import imported.spec
-using SecondaryContract as secondaryInstance
+//// CVL 2: `using`, `pragma`, and `import` require terminating semicolons
+pragma specify 2.0;
+import imported.spec;
+using SecondaryContract as secondaryInstance;
 
 methods {
-    //// CVL 1: methods block entries don't have `function`, visibility
-    //// modifiers, or `;`
-    transferFrom(address, uint) envfree
+    //// CVL 2: methods block entries must start with `function`, end with
+    //// `;`, and declare visibility (internal or external)
+    function transferFrom(address, uint) external envfree;
 
-    //// CVL 1: the order of the modifiers is loose
-    balanceOf(address) envfree returns(uint)
+    //// CVL 2: the order of the modifiers is strict
+    function balanceOf(address) returns(uint) envfree;
 
-    //// CVL 1: in the `methods` block, the receiver must be the contract instance
-    secondaryInstance.balanceOf(address) returns(uint) envfree;
-    secondaryInstance.transferFrom(address, uint) envfree;
+    //// CVL 2: in the `methods` block, you can use either the contract name or the
+    //// instance name
+    secondaryInstance.balanceOf(address) external returns(uint) envfree;
+    SecondaryContract.transferFrom(address, uint) external envfree;
 }
 
-//// CVL 1: `use` statements don't require semicolons
+//// CVL 2: `use` statements require semicolons, unless they end with a block
 use invariant importedInvariant
 
 use rule importedInvariant filtered {
     f -> !excludeFromProver(f)
 }
 
-//// CVL 1: Method literals look like function calls
+//// CVL 2: Method literals must be prefixed with `sig:`
 rule onlyApproveIncreasesAllowance {
     address sender; address recipient;
     allowance_before = allowance(sender, recipient);
@@ -34,8 +35,8 @@ rule onlyApproveIncreasesAllowance {
     allowance_after = allowance(sender, recipient);
 
     assert allowance_after >= allowance_before
-        //// CVL 1: Method literals look like function calls
-        => f.selector == approve(address, uint).selector,
+        //// CVL 2: Method literals look like function calls
+        => f.selector == sig:approve(address, uint).selector,
         "only approve can increase allowances";
 }
 
