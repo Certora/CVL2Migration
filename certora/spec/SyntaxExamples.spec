@@ -23,7 +23,6 @@ use rule importedInvariant filtered {
     f -> !excludeFromProver(f)
 }
 
-//// CVL 1: Method literals look like function calls
 rule onlyApproveIncreasesAllowance {
     address sender; address recipient;
     allowance_before = allowance(sender, recipient);
@@ -33,6 +32,7 @@ rule onlyApproveIncreasesAllowance {
 
     allowance_after = allowance(sender, recipient);
 
+    //// CVL 1: Method literals look like function calls
     assert allowance_after >= allowance_before
         => f.selector == approve(address, uint).selector,
         "only approve can increase allowances";
