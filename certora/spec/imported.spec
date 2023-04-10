@@ -1,6 +1,8 @@
 invariant exampleImportedInvariant() true
 
-rule exampleImportedRule {
+rule exampleImportedRule(method f) {
+    env e; calldataarg args;
+    f(e, args);
     assert true;
 }
 

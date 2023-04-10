@@ -9,7 +9,8 @@ methods {
     transferFrom(address, uint) envfree
 
     //// CVL 1: the order of the modifiers is loose
-    balanceOf(address) returns(uint) envfree
+    //// TODO: can't actually reorder them?
+    allowance(address,address) returns(uint) envfree
 
     //// CVL 1: in the `methods` block, the receiver must be the contract instance
     secondaryInstance.balanceOf(address) returns(uint) envfree
@@ -20,17 +21,17 @@ methods {
 use invariant exampleImportedInvariant
 
 use rule exampleImportedRule filtered {
-    f -> !excludeFromProver(f)
+    f -> !f.isView
 }
 
 rule onlyApproveIncreasesAllowance {
     address sender; address recipient;
-    allowance_before = allowance(sender, recipient);
+    uint allowance_before = allowance(sender, recipient);
 
     method f; env e; calldataarg args;
     f(e, args);
 
-    allowance_after = allowance(sender, recipient);
+    uint allowance_after = allowance(sender, recipient);
 
     //// CVL 1: Method literals look like function calls
     assert allowance_after >= allowance_before
