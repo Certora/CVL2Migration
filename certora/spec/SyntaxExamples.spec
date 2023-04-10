@@ -1,8 +1,3 @@
-
-
-
-
-
 //// CVL 1: `using`, `pragma`, and `import` do not require terminating semicolons
 pragma specify 1.0
 import imported.spec
