@@ -3,4 +3,6 @@ methods {
     ////
     //// here `f` actually expects a Permission enum as an argument, not a uint8
     f(uint8 permission) => NONDET
+
+    //// TODO: more examples
 }
