@@ -44,7 +44,7 @@ jobs:
 
       # Do the actual verification.  The `run` field could be simply
       #
-      #   certoraRun certora/configs/${{ matrix.params }}
+      #   certoraRun certora/conf/${{ matrix.params }}
       # 
       # but we do a little extra work to get the commit messages into the
       # `--msg` argument to `certoraRun`
@@ -55,7 +55,7 @@ jobs:
         run: >
           message="$(git log -n 1 --pretty=format:'CI ${{matrix.params}} %h .... %s')";
           certoraRun \
-            certora/configs/${{ matrix.params }} \
+            certora/conf/${{ matrix.params }} \
             --msg "$(echo $message | sed 's/[^a-zA-Z0-9., _-]/ /g')"
         env:
           # For this to work, you must set your CERTORAKEY secret on the github
@@ -68,7 +68,7 @@ jobs:
       matrix:
         params:
           # each of these is passed to the "Verify rule" step above, which runs
-          # certoraRun on certora/configs/<contents of the line>
+          # certoraRun on certora/conf/<contents of the line>
           #
           # Note that each of these lines will appear as a separate run on
           # prover.certora.com
