@@ -10,7 +10,6 @@ methods {
     function SecondaryContract.transfer(address, uint) external returns(bool);
 
     //// CVL 2: user-defined types are named using the contract name
-    //// TODO: this should require a `memory` annotation
     function getX(PrimaryContract.S) external returns(uint) envfree;
 }
 
